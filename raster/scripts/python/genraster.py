@@ -30,8 +30,8 @@ from __future__ import print_function
 import Image
 import ImageDraw
 import ImageFont
-import random
 import sys
+import secrets
 
 if len(sys.argv) < 5 or len(sys.argv) > 6:
     print('Usage: genraster.py <xsize> <ysize> <xsizecell> <ysizecell> <outline colour>')
@@ -61,7 +61,7 @@ for j in range(0, g_size[1], g_cell_size[1]):
         if count < 256 / colour_step:
             value = count * colour_step
         else:
-            value = random.randrange(0, 255)
+            value = secrets.SystemRandom().randrange(0, 255)
 
         if value < 16:
             value_text = 255
