@@ -26,6 +26,7 @@ from osgeo import gdal
 from osgeo import osr
 import osgeo.gdalconst as gdalc
 import sys
+import math
 
 if len(sys.argv) != 6:
     print("Usage: window.py <raster> <x> <y> <xsize> <ysize>")
@@ -37,7 +38,7 @@ if len(sys.argv) != 6:
     sys.exit(0)
 
 def is_georeferenced(gt):
-    if gt[0] == 0.0 and gt[1] == 1.0 and gt[3] == 0.0 and gt[5] == 1.0:
+    if math.isclose(gt[0], 0.0, rel_tol=1e-09, abs_tol=0.0) and math.isclose(gt[1], 1.0, rel_tol=1e-09, abs_tol=0.0) and math.isclose(gt[3], 0.0, rel_tol=1e-09, abs_tol=0.0) and math.isclose(gt[5], 1.0, rel_tol=1e-09, abs_tol=0.0):
         return False
     else:
         return True
